@@ -1,4 +1,4 @@
-name: Windows Release â€” Maq's Passion
+name: Windows Release Ã¢â‚¬â€ Maq's Passion
 on:
   push:
     tags: ['v*']
@@ -30,7 +30,7 @@ jobs:
           if ([string]::IsNullOrWhiteSpace($env:RELEASE_SIGNING_KEY)) {
             throw "TAURI_SIGNING_PRIVATE_KEY is missing. Refusing to publish unsigned updates."
           }
-      - name: Compile, sign and publish NSIS setup + latest.json
+      - name: Compile, sign and publish MSI installer
         uses: tauri-apps/tauri-action@v0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -42,9 +42,79 @@ jobs:
         with:
           tagName: ${{ github.ref_name }}
           releaseName: Maq's Passion ${{ github.ref_name }}
-          releaseBody: 'Signed Windows installer and in-app update for Maqâ€™s Passion.'
+          releaseBody: 'Signed Windows installer and in-app update for MaqÃ¢â‚¬â„¢s Passion.'
           releaseDraft: false
           prerelease: false
           includeUpdaterJson: true
           updaterJsonPreferNsis: false
           args: --bundles msi
+
+      - name: Generate and upload latest.json
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          $ErrorActionPreference = "Stop"
+          $tag = "${{ github.ref_name }}"
+          $repo = "${{ github.repository }}"
+
+          $releaseText = gh api "repos/$repo/releases/tags/$tag"
+          if ($LASTEXITCODE -ne 0) { throw "Cannot fetch release" }
+
+          $release = $releaseText | ConvertFrom-Json
+          $msi = $release.assets |
+            Where-Object { $_.name -like "*.msi" } |
+            Select-Object -First 1
+
+          if (-not $msi) { throw "MSI not found" }
+
+          $sigName = "$($msi.name).sig"
+          $sigAsset = $release.assets |
+            Where-Object { $_.name -eq $sigName } |
+            Select-Object -First 1
+
+          if (-not $sigAsset) { throw "Signature not found" }
+
+          New-Item -ItemType Directory -Force update-feed | Out-Null
+
+          gh release download $tag --repo $repo `
+            --pattern $sigName --dir update-feed
+
+          if ($LASTEXITCODE -ne 0) {
+            throw "Failed to download signature"
+          }
+
+          $sigPath = Join-Path "update-feed" $sigName
+          $signature = (Get-Content $sigPath -Raw).Trim()
+
+          if (-not $signature) { throw "Signature is empty" }
+
+          $version = $tag -replace '^v', ''
+
+          $feed = @{
+            version = $version
+            notes = "Maq's Passion $tag"
+            pub_date = (Get-Date).ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")
+            platforms = @{
+              "windows-x86_64" = @{
+                url = $msi.browser_download_url
+                signature = $signature
+              }
+            }
+          }
+
+          $json = $feed | ConvertTo-Json -Depth 10
+          $destination = Join-Path "update-feed" "latest.json"
+
+          [System.IO.File]::WriteAllText(
+            $destination,
+            $json,
+            [System.Text.UTF8Encoding]::new($false)
+          )
+
+          gh release upload $tag $destination --repo $repo --clobber
+          if ($LASTEXITCODE -ne 0) {
+            throw "Failed to upload latest.json"
+          }
+
+          Write-Host "SUCCESS: latest.json published for $tag"
