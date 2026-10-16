@@ -160,7 +160,7 @@ export default function App() {
         <button type="button" className={`nav-item ${page==='settings'?'active':''}`} onClick={()=>{setPage('settings');setSelected(null);}}><Settings2 size={18}/><span>Settings</span></button>
         <button type="button" className={`nav-item ${page==='profile'?'active':''}`} onClick={()=>{setPage('profile');setSelected(null);}}><UserRound size={18}/><span>Profile</span></button>
       </nav>
-      <div className="sidebar-footer"><span>MADE BY MAQ</span><span>V2.14.4</span></div>
+      <div className="sidebar-footer"><span>MADE BY MAQ</span><span>V2.14.5</span></div>
     </aside>
 
     <main className="main-content">
