@@ -65,5 +65,16 @@
         "compression": "lzma"
       }
     }
+  },
+  "plugins": {
+    "updater": {
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEVENENCREMzRTYwQjVCMDIKUldRQ1d3dm13NzFNN2N6ZmoyUjZzRXBWS2FtYUt1c0p4Y0V6dThUcWY1NzZ1N3NJaFRqS0E0MGgK",
+      "endpoints": [
+        "https://github.com/fwmaq/maqs-passion/releases/latest/download/latest.json"
+      ],
+      "windows": {
+        "installMode": "passive"
+      }
+    }
   }
 }
