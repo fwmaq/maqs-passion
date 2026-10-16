@@ -1,7 +1,7 @@
 {
   "name": "maqs-passion",
   "private": true,
-  "version": "2.14.1",
+  "version": "2.14.4",
   "type": "module",
   "scripts": {
     "dev": "vite",
