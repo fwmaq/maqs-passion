@@ -1,80 +1,80 @@
-{
-  "$schema": "https://schema.tauri.app/config/2",
-  "productName": "Maq's Passion",
-  "version": "2.14.5",
-  "identifier": "com.maq.maqs-passion",
-  "build": {
-    "beforeDevCommand": "npm run dev",
-    "devUrl": "http://127.0.0.1:5173",
-    "beforeBuildCommand": "npm run build",
-    "frontendDist": "../dist"
-  },
-  "app": {
-    "windows": [
-      {
-        "label": "main",
-        "title": "Maq's Passion",
-        "url": "index.html#main",
-        "width": 1440,
-        "height": 900,
-        "minWidth": 900,
-        "minHeight": 600,
-        "backgroundColor": "#050505",
-        "center": true,
-        "visible": false
-      },
-      {
-        "label": "splash",
-        "title": "Maq's Passion",
-        "url": "index.html#splash",
-        "width": 520,
-        "height": 290,
-        "resizable": false,
-        "decorations": false,
-        "alwaysOnTop": true,
-        "center": true,
-        "backgroundColor": "#000000",
-        "visible": true
-      }
-    ],
-    "security": {
-      "csp": null
-    }
-  },
-  "bundle": {
-    "active": true,
-    "targets": [
-      "nsis"
-    ],
-    "icon": [
-      "icons/32x32.png",
-      "icons/128x128.png",
-      "icons/128x128@2x.png",
-      "icons/icon.ico"
-    ],
-    "createUpdaterArtifacts": true,
-    "windows": {
-      "nsis": {
-        "installMode": "currentUser",
-        "languages": [
-          "English"
-        ],
-        "headerImage": "installer/header.bmp",
-        "sidebarImage": "installer/sidebar.bmp",
-        "installerIcon": "icons/icon.ico",
-        "compression": "lzma"
-      }
-    }
-  },
-  "plugins": {
-    "updater": {
-      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEVENENCREMzRTYwQjVCMDIKUldRQ1d3dm13NzFNN2N6ZmoyUjZzRXBWS2FtYUt1c0p4Y0V6dThUcWY1NzZ1N3NJaFRqS0E0MGgK",
-      "endpoints": [
-        "https://github.com/fwmaq/maqs-passion/releases/latest/download/latest.json"
-      ],
-      "windows": {
-        "installMode": "passive"
-      }
-    }
-  }
+﻿{
+    "$schema":  "https://schema.tauri.app/config/2",
+    "productName":  "Maq\u0027s Passion",
+    "version":  "2.14.5",
+    "identifier":  "com.maq.maqs-passion",
+    "build":  {
+                  "beforeDevCommand":  "npm run dev",
+                  "devUrl":  "http://127.0.0.1:5173",
+                  "beforeBuildCommand":  "npm run build",
+                  "frontendDist":  "../dist"
+              },
+    "app":  {
+                "windows":  [
+                                {
+                                    "label":  "main",
+                                    "title":  "Maq\u0027s Passion",
+                                    "url":  "index.html#main",
+                                    "width":  1440,
+                                    "height":  900,
+                                    "minWidth":  900,
+                                    "minHeight":  600,
+                                    "backgroundColor":  "#050505",
+                                    "center":  true,
+                                    "visible":  false
+                                },
+                                {
+                                    "label":  "splash",
+                                    "title":  "Maq\u0027s Passion",
+                                    "url":  "index.html#splash",
+                                    "width":  520,
+                                    "height":  290,
+                                    "resizable":  false,
+                                    "decorations":  false,
+                                    "alwaysOnTop":  true,
+                                    "center":  true,
+                                    "backgroundColor":  "#000000",
+                                    "visible":  true
+                                }
+                            ],
+                "security":  {
+                                 "csp":  null
+                             }
+            },
+    "bundle":  {
+                   "active":  true,
+                   "targets":  [
+                                   "msi"
+                               ],
+                   "icon":  [
+                                "icons/32x32.png",
+                                "icons/128x128.png",
+                                "icons/128x128@2x.png",
+                                "icons/icon.ico"
+                            ],
+                   "createUpdaterArtifacts":  true,
+                   "windows":  {
+                                   "nsis":  {
+                                                "installMode":  "currentUser",
+                                                "languages":  [
+                                                                  "English"
+                                                              ],
+                                                "headerImage":  "installer/header.bmp",
+                                                "sidebarImage":  "installer/sidebar.bmp",
+                                                "installerIcon":  "icons/icon.ico",
+                                                "compression":  "lzma"
+                                            }
+                               }
+               },
+    "plugins":  {
+                    "updater":  {
+                                    "pubkey":  "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEVENENCREMzRTYwQjVCMDIKUldRQ1d3dm13NzFNN2N6ZmoyUjZzRXBWS2FtYUt1c0p4Y0V6dThUcWY1NzZ1N3NJaFRqS0E0MGgK",
+                                    "endpoints":  [
+                                                      "https://github.com/fwmaq/maqs-passion/releases/latest/download/latest.json"
+                                                  ],
+                                    "windows":  {
+                                                    "installMode":  "passive"
+                                                }
+                                }
+                }
 }

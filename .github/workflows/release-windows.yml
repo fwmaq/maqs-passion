@@ -1,4 +1,4 @@
-name: Windows Release — Maq's Passion
+name: Windows Release â€” Maq's Passion
 on:
   push:
     tags: ['v*']
@@ -42,9 +42,9 @@ jobs:
         with:
           tagName: ${{ github.ref_name }}
           releaseName: Maq's Passion ${{ github.ref_name }}
-          releaseBody: 'Signed Windows installer and in-app update for Maq’s Passion.'
+          releaseBody: 'Signed Windows installer and in-app update for Maqâ€™s Passion.'
           releaseDraft: false
           prerelease: false
           includeUpdaterJson: true
-          updaterJsonPreferNsis: true
-          args: --bundles nsis
+          updaterJsonPreferNsis: false
+          args: --bundles msi
