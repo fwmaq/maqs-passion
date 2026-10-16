@@ -20,4 +20,4 @@ serde_json = "1"
 tokio = { version = "1", features = ["time"] }
 
 
-tauri-plugin-updater = "=2.14.0"
+tauri-plugin-updater = { git = "https://github.com/tauri-apps/plugins-workspace", rev = "ee2c9775743c9962f7a1e800fb5e7b82b96597df", default-features = false, features = ["rustls-tls", "system-proxy"] }
