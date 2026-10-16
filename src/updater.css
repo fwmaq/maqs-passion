@@ -1,0 +1,15 @@
+/* Update surfaces are intentionally compact and consistent with the graphite UI. */
+.mp-update-settings{margin-top:18px;border:1px solid #292929;background:linear-gradient(145deg,#171717,#101010);border-radius:16px;padding:22px;display:grid;gap:17px;color:#ebebeb}
+.mp-update-title{display:flex;align-items:center;gap:14px}.mp-update-icon,.mp-update-toast-icon{width:42px;height:42px;display:grid;place-items:center;border-radius:12px;background:#252525;color:#f8f8f8;flex-shrink:0}
+.mp-update-title h2{margin:0;font-size:16px;font-weight:800;letter-spacing:-.025em}.mp-update-title p{margin:4px 0 0;font-size:12px;color:#888}
+.mp-update-status{font-size:13px;color:#bbb;display:flex;align-items:center;gap:9px;min-height:22px}.mp-update-status svg{flex-shrink:0}
+.mp-update-bar{height:4px;border-radius:99px;background:#303030;overflow:hidden}.mp-update-bar span{display:block;height:100%;border-radius:99px;background:#f3f3f3;transition:width .22s linear}
+.mp-update-actions{display:flex;gap:14px;align-items:center;flex-wrap:wrap}.mp-update-actions button{display:flex;align-items:center;justify-content:center;gap:8px;border:1px solid #373737;border-radius:8px;padding:10px 13px;font-weight:750;font-size:12px;cursor:pointer}
+.mp-update-actions button:disabled{opacity:.45;cursor:not-allowed}.mp-update-primary{background:#f5f5f5;color:#131313}.mp-update-secondary{background:#262626;color:#eee}
+.mp-update-actions a{display:flex;align-items:center;gap:6px;font-size:12px;color:#aaa;text-decoration:none}.mp-update-actions a:hover{color:white}
+.mp-update-help{font-size:11px;color:#929292;margin:0;line-height:1.6;overflow-wrap:anywhere}.mp-update-help code{color:#dadada;background:#222;padding:2px 4px}
+.mp-update-toast{position:fixed;z-index:200;right:22px;bottom:24px;display:flex;align-items:center;gap:14px;max-width:630px;background:#171717;border:1px solid #3d3d3d;box-shadow:0 22px 70px #000b;color:#f5f5f5;border-radius:14px;padding:14px 16px;animation:mp-toast-arrive .3s ease both}
+.mp-update-toast-copy{display:grid;gap:4px;min-width:160px}.mp-update-toast-copy strong{font-size:13px}.mp-update-toast-copy span{font-size:11px;color:#9d9d9d}.mp-update-toast-action{background:white;color:black;border:none;padding:11px 13px;white-space:nowrap;border-radius:8px;font-weight:800;cursor:pointer}.mp-update-toast-action:hover{background:#ddd}.mp-update-toast-close{display:grid;place-items:center;border:0;background:transparent;color:#999;cursor:pointer;padding:4px}
+.mp-spin{animation:mp-update-rotate 1.2s linear infinite}@keyframes mp-update-rotate{to{transform:rotate(360deg)}}@keyframes mp-toast-arrive{from{transform:translateY(14px);opacity:0}to{transform:translateY(0);opacity:1}}
+@media(max-width:900px){.mp-update-toast{left:16px;right:16px;bottom:16px;flex-wrap:wrap}.mp-update-toast-action{margin-left:auto}}
+@media(prefers-reduced-motion:reduce){.mp-update-toast,.mp-spin{animation:none!important}.mp-update-bar span{transition:none!important}}

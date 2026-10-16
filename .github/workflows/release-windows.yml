@@ -1,0 +1,50 @@
+name: Windows Release — Maq's Passion
+on:
+  push:
+    tags: ['v*']
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: x86_64-pc-windows-msvc
+      - name: Install frontend dependencies
+        run: npm install --no-audit --no-fund
+      - name: Validate signed updater configuration and version
+        run: node scripts/validate-release.mjs
+      - name: Require signing key before release
+        shell: pwsh
+        env:
+          RELEASE_SIGNING_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+        run: |
+          if ([string]::IsNullOrWhiteSpace($env:RELEASE_SIGNING_KEY)) {
+            throw "TAURI_SIGNING_PRIVATE_KEY is missing. Refusing to publish unsigned updates."
+          }
+      - name: Compile, sign and publish NSIS setup + latest.json
+        uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
+          VITE_SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+          CARGO_BUILD_JOBS: '2'
+        with:
+          tagName: ${{ github.ref_name }}
+          releaseName: Maq's Passion ${{ github.ref_name }}
+          releaseBody: 'Signed Windows installer and in-app update for Maq’s Passion.'
+          releaseDraft: false
+          prerelease: false
+          includeUpdaterJson: true
+          updaterJsonPreferNsis: true
+          args: --bundles nsis

@@ -1,0 +1,23 @@
+[package]
+name = "maqs-passion"
+version = "2.14.0"
+description = "Maq's Passion — Fortnite Competitive Companion"
+authors = ["maq"]
+edition = "2021"
+
+[lib]
+name = "maqs_passion_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+reqwest = { version = "0.12", default-features = false, features = ["json", "rustls-tls"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tokio = { version = "1", features = ["time"] }
+
+
+tauri-plugin-updater = "2"

@@ -1,0 +1,15 @@
+import{readFileSync,writeFileSync}from'node:fs';
+const version=process.argv[2];
+if(!version||!/^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$/.test(version))throw Error('Usage: npm run version:set -- 2.14.1');
+const pkg=JSON.parse(readFileSync('package.json','utf8'));
+pkg.version=version;
+writeFileSync('package.json',JSON.stringify(pkg,null,2)+'\n');
+const config=JSON.parse(readFileSync('src-tauri/tauri.conf.json','utf8'));
+config.version=version;
+writeFileSync('src-tauri/tauri.conf.json',JSON.stringify(config,null,2)+'\n');
+const cargo=readFileSync('src-tauri/Cargo.toml','utf8').replace(/(\[package\][\s\S]*?\bversion\s*=\s*")[^"]+("\s*)/,`$1${version}$2`);
+writeFileSync('src-tauri/Cargo.toml',cargo);
+const path='src/App.tsx';
+const app=readFileSync(path,'utf8').replace(/<span>V\d+\.\d+(?:\.\d+)?<\/span><\/div>/,`<span>V${version}</span></div>`);
+writeFileSync(path,app);
+console.log('Set app version to',version,'in package.json, tauri.conf.json and Cargo.toml.');

@@ -1,0 +1,41 @@
+{
+  "name": "maqs-passion",
+  "private": true,
+  "version": "2.14.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "tauri": "tauri",
+    "desktop": "tauri dev",
+    "desktop:build": "tauri build",
+    "photos": "node scripts/fetch-photos.mjs",
+    "test:drop": "node scripts/test-drop-physics.mjs",
+    "predev": "node scripts/restore-photos.mjs",
+    "prebuild": "node scripts/restore-photos.mjs",
+    "updates:configure": "node scripts/configure-updates.mjs",
+    "updates:validate": "node scripts/validate-release.mjs",
+    "version:set": "node scripts/set-version.mjs"
+  },
+  "dependencies": {
+    "lucide-react": "^0.468.0",
+    "motion": "^12.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "@tauri-apps/api": "^2.0.0",
+    "@supabase/supabase-js": "^2.57.0",
+    "@tauri-apps/plugin-updater": "^2.0.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.0.0",
+    "@tauri-apps/cli": "^2.0.0",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "tailwindcss": "^4.0.0",
+    "typescript": "~5.7.3",
+    "vite": "^6.1.0"
+  }
+}

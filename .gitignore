@@ -1,0 +1,16 @@
+# Keep development secrets and generated files out of GitHub
+.env*
+!.env.example
+node_modules/
+dist/
+.vite/
+src-tauri/target/
+src-tauri/gen/schemas/
+.DS_Store
+
+
+# Tauri updater private signing material (never publish)
+*.key
+*.key.sec
+*.pem
+!src-tauri/updater-public.key

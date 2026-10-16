@@ -1,0 +1,61 @@
+/* v2.12: cohesive, restrained motion and a docked community utility panel.
+   No continuous JS animation loops outside the Aim Arena. */
+:root{color-scheme:dark;--mp-bg:#090909;--mp-panel:#121212;--mp-border:#292929;--mp-muted:#8a8a8a;--mp-ease:cubic-bezier(.22,1,.36,1)}
+.app-layout{background:var(--mp-bg)}
+.sidebar{background:#0c0c0c;border-right:1px solid #252525;padding:26px 12px 17px;position:relative;z-index:2}
+.sidebar-brand{padding:5px 13px 24px;gap:6px}.brand-title{font-size:19px;letter-spacing:-1.15px}.brand-subtitle{color:#777;letter-spacing:1.8px}
+.sidebar-divider{background:#262626;margin:0 8px 16px}
+.sidebar-navigation{gap:4px;padding:0 4px 12px;scrollbar-color:#282828 transparent}
+.nav-item{position:relative;min-height:43px;display:flex;gap:12px;padding:11px 13px;font-size:12px;font-weight:730;color:#898989;border-radius:9px;transition:background-color .21s var(--mp-ease),color .21s,border-color .21s,transform .21s var(--mp-ease)}
+.nav-item:hover{background:#1b1b1b;border-color:#292929;transform:translateX(3px);color:#f4f4f4}
+.nav-item.active{background:#202020;border-color:#363636;color:#fff}
+.nav-item.active::before{content:'';position:absolute;left:-5px;top:29%;height:42%;width:2px;background:#dfdfdf;border-radius:3px;animation:mp-rail .32s var(--mp-ease) both}
+@keyframes mp-rail{from{opacity:0;transform:scaleY(.4)}to{opacity:1;transform:scaleY(1)}}
+.nav-item svg{flex-shrink:0;transition:transform .25s var(--mp-ease)}.nav-item:hover svg{transform:scale(1.09)}
+.sidebar-profile{border-radius:11px!important;background:#161616!important;border:1px solid #2b2b2b!important;margin:0 4px 17px!important;transition:background-color .2s,border-color .2s,transform .2s var(--mp-ease)}
+.sidebar-profile:hover{border-color:#444!important;background:#202020!important;transform:translateY(-1px)}
+.sidebar-footer{padding:16px 13px 0;color:#686868;border-top-color:#292929}
+.main-content{background:#090909;scrollbar-color:#353535 transparent}
+/* Opacity-only page transitions don't affect fixed overlays or pointer lock. */
+.main-content>:first-child{animation:mp-page-in .3s ease-out both}
+@keyframes mp-page-in{from{opacity:.4}to{opacity:1}}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid #d8e6e0;outline-offset:3px}
+button:active{filter:brightness(.95)}
+/* Bring cards and tool inputs into the same softer visual language. */
+.pro-card,.detail-panel,.news-story,.stream-tile,.stream-hero,.pa-stat,.pa-drill,.pa-sidebar,.pa-history{transition:border-color .25s,background-color .25s,box-shadow .25s,transform .25s var(--mp-ease)}
+.pro-card:hover,.stream-tile:hover{box-shadow:0 20px 36px #0007}
+.stream-art img{transition:transform .35s var(--mp-ease),filter .3s}.stream-tile:hover .stream-art img{transform:scale(1.045);filter:brightness(.83)}
+.stream-hero-play,.stream-hero-secondary,.pa-primary,.pa-secondary{transition:transform .21s var(--mp-ease),box-shadow .21s,background-color .21s}
+.stream-hero-play:hover,.pa-primary:hover{transform:translateY(-2px);box-shadow:0 11px 27px #ffffff13}
+.stream-categories button,.pa-option-row button,.pa-config-tabs button{transition:background-color .18s,color .18s,border-color .18s}
+/* Community panel is an extension of the workspace, not a second app. */
+.members-panel{width:226px;min-width:226px;background:#0c0c0c;border-left:1px solid #222;box-shadow:none;animation:mp-dock-in .26s var(--mp-ease) both}
+@keyframes mp-dock-in{from{opacity:.35;transform:translateX(9px)}to{opacity:1;transform:translateX(0)}}
+.members-header{padding:21px 13px 14px;border-bottom:1px solid #242424}
+.members-heading-small{font-size:8px;letter-spacing:1.35px;margin-bottom:8px;color:#696969}
+.members-heading-row h2{font-size:17px;letter-spacing:-.5px}
+.members-heading-row button,.members-group-heading button{padding:5px;color:#727272;transition:color .2s,background-color .2s}
+.members-count{margin-top:11px;font-size:9px;letter-spacing:.8px;color:#858585}.members-count strong{font-size:11px}
+.members-search{height:35px;margin-top:13px;padding:0 10px;background:#131313;border-color:#272727;border-radius:8px}
+.members-search input{font-size:11px}
+.members-scroll{padding:13px 8px;scrollbar-color:#292929 transparent}
+.members-group-heading{padding:2px 7px 9px;font-size:9px;color:#828282;letter-spacing:1px}
+.member-row{margin:0 0 2px;border-radius:8px}.member-row:hover,.member-row-expanded{background:#181818;border-color:#242424}
+.member-identity{min-height:49px;padding:6px;gap:9px}.member-avatar{width:34px;height:34px;font-size:12px;background:#252525;border-color:#343434}.member-details strong{font-size:11px}.member-details{gap:3px}.member-role{font-size:9px}
+.member-dot{width:9px;height:9px;border-color:#0c0c0c}.member-expanded{padding-left:48px}
+.members-footer{padding:13px;border-top:1px solid #262626;font-size:8px;line-height:1.6;color:#656565}
+.members-offline-toggle{font-size:9px;letter-spacing:1px;padding:14px 7px 10px;margin-top:12px}
+.members-status-pip{box-shadow:0 0 6px #b7d8ba3b}
+.members-alert{font-size:10px;padding:8px}
+/* Keep the training arena immersive even if the member dock is visible. */
+.pa-header-right .pa-engine-chip{font-variant-numeric:tabular-nums}
+.pa-stat strong{font-variant-numeric:tabular-nums}
+@media(max-width:1380px){.members-panel{width:203px;min-width:203px}.sidebar{width:214px;min-width:214px}}
+@media(max-width:1120px){.members-panel{width:220px;min-width:220px;position:absolute;right:0;top:0;z-index:20;box-shadow:-16px 0 50px #000a}.members-panel:before{content:'';position:absolute;inset:0;z-index:-1;background:#0c0c0c}}
+@media(max-width:740px){.sidebar{width:178px;min-width:178px;padding:17px 7px}.sidebar-brand{padding:5px 8px 18px}.brand-title{font-size:16px}.nav-item{padding:10px 9px;font-size:11px}.members-panel{width:min(250px,75vw);min-width:0}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+
+.nav-item.member-inline-on{color:#d4d4d4;background:#141414;border-color:#202020}
+
+.pa-runtime-meter{font-variant-numeric:tabular-nums;color:#b4dacd;font-size:10px;font-weight:900;letter-spacing:.4px}
+@media(max-width:790px){.pa-runtime-meter{display:none}}
